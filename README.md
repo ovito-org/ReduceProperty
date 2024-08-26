@@ -1,34 +1,55 @@
-# Python Modifier Template
+# Reduce Property
+Apply common reduction operations to properties in the DataCollection
 
-Template for a custom Python-based modifier that hooks into OVITO and can easily be shared with other users.
+## Description
+Apply one of the following reduction operations to a selected property. If the property as multiple components, e.g. position, the reduction operation is applied for each component.
 
-This repository contains a template for creating your own [Python script modifier](https://docs.ovito.org/python/introduction/custom_modifiers.html), 
-which can be installed into *OVITO Pro* or the [`ovito`](https://pypi.org/project/ovito/) Python module using *pip*.
+Operations:
 
-## Getting Started
+    - Mean
+    - Median
+    - Standard Deviation
+    - Variance
+    - Minimum
+    - Maximum
+    - Sum
+    - Non-zero
 
-1. Click the "Use this template" button to create your own repository based on this template.
-2. Rename `src/PackageName` to reflect the name of your modifier.
-3. Implement your [modifier](https://docs.ovito.org/python/introduction/custom_modifiers.html#advanced-interface) in [`src/PackageName/__init__.py`](src/PackageName/__init__.py). If your modifier needs access to more than one frame of a trajectory, you can uncomment and implement the `input_caching_hints` method. Otherwise, you can delete it. More details on this method can be found in the [OVITO Python docs](https://www.ovito.org/docs/current/python/introduction/custom_modifiers.html#writing-custom-modifiers-advanced-interface). 
-4. Fill in the [`pyproject.toml`](pyproject.toml) file. Fields that need to be replaced with your information are enclosed in descriptive `[[field]]` tags. Please make sure to include ovito>=3.9.1 as a dependency. Depending on your needs, you can add additional fields to the `pyproject.toml` file. Information can be found [here](https://setuptools.pypa.io/en/latest/userguide/index.html).
-5. Fill in the [`README_Template.md`](README_Template.md) file. Again, the `[[fields]]` placeholders should guide you. Feel free to add other sections like "Images", "Citation", or "References" as needed.
-6. Add meaningful examples and data sample files to the `examples` directory to help others understand the use of your modifier.
-7. Pick a license for your project and replace the current (MIT) [`LICENSE`](LICENSE) file with your license. If you keep the MIT license, please update the name and year in the current file.
-8. Once you're done, rename `README_Template.md` to `README.md`, replacing this file.
+## Parameters 
+- `input_container` : `ovito.data.DataObject.Ref` / "Container": [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selcted.
+- `input_property`: `str` / "Property": [Property](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.Property) to which the reduction operation will be applied.
+- `operation` : `str` / "Operation": Reduction operation to apply to the selected property.
+- `only_selected` : `bool` / "Reduce only selected elements": Apply reduction operation only to selected entries in the property array. Requires the "Selection" property to be present in the container.
 
-## Testing
-This repository is configured to enable automated testing using the [pytest](https://docs.pytest.org/en/7.4.x/) framework. Tests are automatically executed after each push to the main branch. To set up and activate automated testing, follow these two steps:
+The output is stored in a [global attribute](https://www.ovito.org/manual/python/introduction/data_model.html#global-attributes) under the `<container>_<property>_<operation>` key.
 
-1. Write your tests in the `test/test_modifier.py` file. You can also use other filenames that adhere to the pytest requirements.
-2. Open the `.github/workflows/python-tests.yml` file and remove the `if: ${{ false }}` condition on line 15.
+## Example
+![Example_01](examples/Example_01.png)
 
-If needed, you can also adjust the operating system and Python versions by modifying the following lines:
-```yaml
-os: [ubuntu-latest, macos-latest, windows-latest]
-python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+```python
+# Reduce Property:
+pipeline.modifiers.append(
+    ReduceProperty(
+        input_container=DataObject.Ref(Particles, "particles"),
+        input_property="Velocity",
+    )
+)
 ```
 
-An example can be found [here](https://github.com/ovito-org/GenerateRandomSolution).
+## Installation
+- OVITO Pro [integrated Python interpreter](https://docs.ovito.org/python/introduction/installation.html#ovito-pro-integrated-interpreter):
+  ```
+  ovitos -m pip install --user git+https://github.com/ovito-org/ReduceProperty
+  ``` 
+  The `--user` option is recommended and [installs the package in the user's site directory](https://pip.pypa.io/en/stable/user_guide/#user-installs).
 
-As of August 16, 2023, according to the [GitHub documentation](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions), *"GitHub Actions usage is free for standard GitHub-hosted runners in public repositories, and for self-hosted runners."* Please refer to the GitHub documentation if you are uncertain about incurring costs.
+- Other Python interpreters or Conda environments:
+  ```
+  pip install git+https://github.com/ovito-org/ReduceProperty
+  ```
 
+## Technical information / dependencies
+- Tested on OVITO version 3.11.0
+
+## Contact
+- Daniel Utt (utt@ovito.org)
