@@ -2,7 +2,7 @@
 Apply common reduction operations to properties in the DataCollection
 
 ## Description
-Apply one of the following reduction operations to a selected property. If the property as multiple components, e.g. position, the reduction operation is applied for each component.
+Apply one of the following reduction operations to a selected property. If the property has multiple components, e.g. position, the reduction operation is applied for each component.
 
 Operations:
 
@@ -16,7 +16,7 @@ Operations:
     - Non-zero
 
 ## Parameters 
-- `input_container` : `ovito.data.DataObject.Ref` / "Container": [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selcted.
+- `input_container` : `ovito.data.DataObject.Ref` / "Container": [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selected.
 - `input_property`: `str` / "Property": [Property](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.Property) to which the reduction operation will be applied.
 - `operation` : `str` / "Operation": Reduction operation to apply to the selected property.
 - `only_selected` : `bool` / "Reduce only selected elements": Apply reduction operation only to selected entries in the property array. Requires the "Selection" property to be present in the container.
