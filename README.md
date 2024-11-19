@@ -16,10 +16,13 @@ Operations:
     - Non-zero
 
 ## Parameters 
-- `input_container` : `ovito.data.DataObject.Ref` / "Container": [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selected.
-- `input_property`: `str` / "Property": [Property](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.Property) to which the reduction operation will be applied.
-- `operation` : `str` / "Operation": Reduction operation to apply to the selected property.
-- `only_selected` : `bool` / "Reduce only selected elements": Apply reduction operation only to selected entries in the property array. Requires the "Selection" property to be present in the container.
+
+| GUI name                          | Python name       | Description                                                                                                                                   | Default Value |
+|-----------------------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| **Container**                     | `input_container` | [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selected.      | ``            |
+| **Property**                      | `input_property`  | [Property](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.Property) to which the reduction operation will be applied. | ``            |
+| **Operation**                     | `operation`       | Reduction operation to apply to the selected property.                                                                                        | `"Mean"`      |
+| **Reduce only selected elements** | `only_selected`   | Apply reduction operation only to selected entries in the property array. Requires the "Selection" property to be present in the container.   | `False`       |
 
 The output is stored in a [global attribute](https://www.ovito.org/manual/python/introduction/data_model.html#global-attributes) under the `<container>_<property>_<operation>` key.
 
