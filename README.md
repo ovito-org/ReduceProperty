@@ -19,8 +19,8 @@ Operations:
 
 | GUI name                          | Python name       | Description                                                                                                                                   | Default Value |
 |-----------------------------------|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| **Container**                     | `input_container` | [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selected.      | ``            |
-| **Property**                      | `input_property`  | [Property](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.Property) to which the reduction operation will be applied. | ``            |
+| **Container**                     | `input_container` | [Container](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.PropertyContainer) from which a property is selected.      |               |
+| **Property**                      | `input_property`  | [Property](https://www.ovito.org/manual/python/modules/ovito_data.html#ovito.data.Property) to which the reduction operation will be applied. |               |
 | **Operation**                     | `operation`       | Reduction operation to apply to the selected property.                                                                                        | `"Mean"`      |
 | **Reduce only selected elements** | `only_selected`   | Apply reduction operation only to selected entries in the property array. Requires the "Selection" property to be present in the container.   | `False`       |
 
